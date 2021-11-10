@@ -1,7 +1,7 @@
 {
     "name": "omulti",
     "author": "Vlad Vidican <vlad.vidican@gmail.com>",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Node.js HTTP file uploads",
     "homepage": "https://github.com/VladVidican/omulti",
     "bugs": {
