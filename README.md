@@ -4,18 +4,16 @@
 
 `Omulti` is a Node.js library that handles HTTP file uploads.
 
--   It's very easy to use
--   It's fast
--   It's written in Typescript
--   It has few dependencies
+-   Fast
+-   Easy to use
+-   Written in Typescript
+-   It has very few dependencies
 
-To use it simply run:
+To install it run:
 
 ```bash
 npm i omulti
 ```
-
-to install the library in your Node.js project.
 
 ## How to use it
 
@@ -196,6 +194,17 @@ httpServer.listen(3000);
 
 #### Methods
 
+**Field**
+
+-   getContents()
+
+**File**
+
+-   getContents()
+-   saveToDisk(path: string)
+
+#### `getContents()`
+
 Both entities have a `getContents()` method that returns a `Promise<Buffer>` with the entire contents of the `Field/File`. Be careful when using this, make sure to explicitly set the `maxFieldSize` and/or the `maxFileSize`, to prevent the host machine from being starved of memory.
 
 ```typescript
@@ -214,5 +223,7 @@ const httpServer = createServer(async (req, res) => {
 
 httpServer.listen(3000);
 ```
+
+#### `saveToDisk(path: string)`
 
 The `File` object also has a `saveToDisk('path/to/save/file')` method that will save the file to a provided path on the disk.
