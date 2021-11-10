@@ -23,7 +23,7 @@ To use it with a Node.js HTTP server simply create a new HTTP server an pass the
 
 ```typescript
 import { createServer } from "http";
-import { Omulti } from "./omulti";
+import { Omulti } from "omulti";
 
 const httpServer = createServer(async (req, res) => {
     const omulti = new Omulti(req);
@@ -42,7 +42,7 @@ Alternatively, you can also use events if you want:
 
 ```typescript
 import { createServer } from "http";
-import { Omulti } from "./omulti";
+import { Omulti } from "omulti";
 
 const httpServer = createServer(async (req, res) => {
     const omulti = new Omulti(req);
@@ -61,7 +61,7 @@ To get just the fields do:
 
 ```typescript
 import { createServer } from "http";
-import { Omulti } from "./omulti";
+import { Omulti } from "omulti";
 
 const httpServer = createServer(async (req, res) => {
     const omulti = new Omulti(req);
@@ -78,8 +78,7 @@ To get both files and fields you can use the `getAll()` method. However you need
 
 ```typescript
 import { createServer } from "http";
-import { File } from "./file";
-import { Omulti } from "./omulti";
+import { Omulti } from "omulti";
 
 const httpServer = createServer(async (req, res) => {
     const omulti = new Omulti(req);
@@ -100,7 +99,7 @@ As before you can use events here instead, so to get the fields listen on the `f
 
 ```typescript
 import { createServer } from "http";
-import { Omulti } from "./omulti";
+import { Omulti } from "omulti";
 
 const httpServer = createServer(async (req, res) => {
     const omulti = new Omulti(req);
@@ -117,8 +116,7 @@ Or to get both files and fields, use the `part` event:
 
 ```typescript
 import { createServer } from "http";
-import { Omulti } from "./omulti";
-import { File } from "./file";
+import { Omulti } from "omulti";
 
 const httpServer = createServer(async (req, res) => {
     const omulti = new Omulti(req);
@@ -179,7 +177,7 @@ E.g. you can use this to pipe to a writable stream:
 ```typescript
 import { createWriteStream } from "fs";
 import { createServer } from "http";
-import { Omulti } from "./omulti";
+import { Omulti } from "omulti";
 
 const httpServer = createServer(async (req, res) => {
     const omulti = new Omulti(req);
@@ -209,7 +207,7 @@ Both entities have a `getContents()` method that returns a `Promise<Buffer>` wit
 
 ```typescript
 import { createServer } from "http";
-import { Omulti } from "./omulti";
+import { Omulti } from "omulti";
 
 const httpServer = createServer(async (req, res) => {
     const omulti = new Omulti(req, {
