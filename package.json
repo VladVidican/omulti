@@ -8,16 +8,13 @@
         "url": "https://github.com/VladVidican/omulti/issues",
         "email": "vlad.vidican@gmail.com"
     },
-    "main": "dist/index.js",
-    "types": "dist",
+    "main": "index.js",
+    "types": ".",
     "keywords": [
         "upload",
         "files",
         "http",
         "multipart/form-data"
-    ],
-    "files": [
-        "dist"
     ],
     "scripts": {
         "build": "rm -rf ./dist && tsc --build lib",
