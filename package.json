@@ -3,6 +3,11 @@
     "author": "Vlad Vidican <vlad.vidican@gmail.com>",
     "version": "0.0.1",
     "description": "Node.js HTTP file uploads",
+    "homepage": "https://github.com/VladVidican/omulti",
+    "bugs": {
+        "url": "https://github.com/VladVidican/omulti/issues",
+        "email": "vlad.vidican@gmail.com"
+    },
     "main": "dist/index.js",
     "types": "dist/types",
     "keywords": [
