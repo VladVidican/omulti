@@ -9,7 +9,7 @@
         "email": "vlad.vidican@gmail.com"
     },
     "main": "dist/index.js",
-    "types": "dist/types",
+    "types": "dist",
     "keywords": [
         "upload",
         "files",
