@@ -20,7 +20,7 @@
         "build": "rm -rf ./dist && tsc --build lib",
         "test": "mocha",
         "bench": "ts-node ./test/benchmarks/large-single.ts && ts-node ./test/benchmarks/large-multi.ts",
-        "prepublishOnly": "npm run build && cp README.md ./dist && cp package.json ./dist && cp LICENSE ./dist && cd ./dist"
+        "prepublishOnly": "npm run build && cp README.md ./dist && cp package.json ./dist && cp LICENSE ./dist"
     },
     "dependencies": {
         "tiny-typed-emitter": "2.1.0"
