@@ -11,6 +11,9 @@
     "exports": {
         ".": "./dist/index.js"
     },
+    "files": [
+        "/dist"
+    ],
     "keywords": [
         "upload",
         "files",
