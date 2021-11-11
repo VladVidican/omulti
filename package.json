@@ -18,7 +18,7 @@
     ],
     "scripts": {
         "build": "rm -rf ./dist && tsc --build lib",
-        "build:publish": "npm run build && cp README.md ./dist && cp package.json ./dist && cp LICENSE ./dist",
+        "build:publish": "npm run build && cp README.md ./dist && cp package.json ./dist && cp LICENSE ./dist && npm publish ./dist",
         "test": "mocha",
         "bench": "ts-node ./test/benchmarks/large-single.ts && ts-node ./test/benchmarks/large-multi.ts"
     },
