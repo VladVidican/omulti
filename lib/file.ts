@@ -1,5 +1,5 @@
 import { createWriteStream } from "fs";
-import { stat } from "fs/promises";
+import { stat } from "fs";
 import { IncomingMessage } from "http";
 import * as nodePath from "path";
 import { Field } from "./field";
@@ -21,17 +21,19 @@ export class File extends Field {
         if (!this.filename) {
             throw new Error(`Can't write to ${path} as filename is missing`);
         }
-
-        const stats = await stat(path);
-
-        if (!stats.isDirectory()) {
-            throw new Error("Path must be a directory");
-        }
-
-        path = nodePath.join(path, this.filename);
-
-        const writeStream = createWriteStream(path);
         return new Promise((resolve, reject) => {
+           stat(path, (err, stats) => {
+                if(err) {
+                    reject(err)
+                }
+                if (!stats.isDirectory()) {
+                    throw new Error("Path must be a directory");
+                }
+            });
+    
+            path = nodePath.join(path, this.filename!);
+    
+            const writeStream = createWriteStream(path);
             this.stream
                 .pipe(writeStream)
                 .on("finish", () => {
