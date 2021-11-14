@@ -31,10 +31,5 @@ jobs:
         with:
          node-version: '12'
          
-      - name: install dep
       - run: npm ci
-      
-      - name: run tests
       - run: npm run test
-
-
