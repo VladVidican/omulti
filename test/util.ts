@@ -1,6 +1,6 @@
 import { createReadStream } from "fs";
 import { IncomingMessage } from "http";
-import path from "path/posix";
+import path from "path";
 import { Readable } from "stream";
 
 interface FakeIncommingMessage extends Readable {
