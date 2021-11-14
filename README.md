@@ -1,6 +1,6 @@
 # Omulti - Node.js HTTP file uploads
 
-![tests](https://github.com/VladVidican/omulti/actions/workflows/main.yaml/badge.svg)
+![tests](https://github.com/VladVidican/omulti/actions/workflows/main.yml/badge.svg)
 
 
 ## Getting started
