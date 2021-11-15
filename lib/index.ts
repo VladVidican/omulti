@@ -58,6 +58,14 @@ export class Omulti extends TypedEmitter<OmultiEvents> {
     private chunkCache = Buffer.alloc(0);
 
     /**
+     * The data getter is basically a concat of all internal buffer chunks.
+     * Since buffer concat is expensive we would like to avoid doing it if possible,
+     * therefore whenever we do it once, we cache it and after a new chunk has arrived we invalidate it
+     */
+    private dataCache = Buffer.alloc(0);
+    private invalidateDataCache = true;
+
+    /**
      * The current header and part that are being processed
      */
     private currentHeader: Header | null = null;
@@ -386,6 +394,8 @@ export class Omulti extends TypedEmitter<OmultiEvents> {
         this.incrementSize(chunk.length);
 
         if (this.mode === Mode.BOUNDARY) {
+            this.invalidateDataCache = true;
+
             if (this.chunkCache.length > 0 || chunk.length < this.endBoundaryLength) {
                 this.chunkCache = Buffer.concat([this.chunkCache, chunk]);
             }
@@ -461,7 +471,11 @@ export class Omulti extends TypedEmitter<OmultiEvents> {
     }
 
     private get data() {
-        return Buffer.concat(this.internalBuffer);
+        if (this.invalidateDataCache) {
+            this.dataCache = Buffer.concat(this.internalBuffer);
+            this.invalidateDataCache = false;
+        }
+        return this.dataCache;
     }
 
     /**
