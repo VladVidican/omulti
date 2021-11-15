@@ -292,8 +292,9 @@ export class Omulti extends TypedEmitter<OmultiEvents> {
         if (this.mode === Mode.HEADER) {
             this.internalBuffer = [];
             this.internalBufferFresh = true;
-            if (this.hasEntireHeader()) {
-                this.processHeader();
+            const headerEndIndex = this.getHeaderEndIndex();
+            if (headerEndIndex !== -1) {
+                this.processHeader(headerEndIndex);
                 if (this.requestHasFinished) {
                     this.handleData(null, true);
                 }
@@ -301,11 +302,8 @@ export class Omulti extends TypedEmitter<OmultiEvents> {
         }
     }
 
-    private hasEntireHeader() {
-        if (this.headerBuffer.includes(this.headerEnd)) {
-            return true;
-        }
-        return false;
+    private getHeaderEndIndex() {
+        return this.headerBuffer.indexOf(this.headerEnd);
     }
 
     private switchMode(mode: Mode) {
@@ -316,35 +314,24 @@ export class Omulti extends TypedEmitter<OmultiEvents> {
      *  @descriptions Creates a new header when the entire header data has been buffered
      *  and after that creates a new part and switchs to BOUNDARY mode
      */
-    private processHeader() {
+    private processHeader(headerEndIndex: number) {
         this.currentHeader = new Header();
         this.currentPartSize = 0;
 
-        // skip the boundary
-        let nextCRLFIndex = this.headerBuffer.indexOf(this.CRLF);
-        nextCRLFIndex = nextCRLFIndex + this.CRLF.length;
+        this.currentHeader.content = this.headerBuffer
+            .slice(this.boundary.length + this.CRLF.length, headerEndIndex)
+            .toString("utf-8");
 
-        while (nextCRLFIndex !== -1) {
-            let previousCRLFIndex = nextCRLFIndex;
-            nextCRLFIndex = this.headerBuffer.indexOf(this.CRLF, nextCRLFIndex + this.CRLF.length);
+        this.switchMode(Mode.BOUNDARY);
 
-            let currentLine = this.headerBuffer.slice(previousCRLFIndex, nextCRLFIndex);
+        this.createNewPart();
 
-            this.currentHeader.content = this.currentHeader.content.concat(currentLine.toString("utf8"));
-
-            // if we reached a line that is just a CRLF it means we have reached the end of the header
-            if (currentLine.equals(this.CRLF)) {
-                this.switchMode(Mode.BOUNDARY);
-
-                this.createNewPart();
-
-                // at this point we need to move the remaining data that was not part of the header (i.e. the body of part)
-                // into the internal buffer
-                const remainingData = this.headerBuffer.slice(previousCRLFIndex + this.headerEnd.length);
-                this.headerBuffer = Buffer.alloc(0);
-                this.addChunkToInternalBuffer(remainingData);
-                break;
-            }
+        // at this point we need to move the remaining data that was not part of the header (i.e. the body of part)
+        // into the internal buffer
+        const remainingData = this.headerBuffer.slice(headerEndIndex + this.headerEnd.length);
+        this.headerBuffer = Buffer.alloc(0);
+        if (remainingData.length > 0) {
+            this.addChunkToInternalBuffer(remainingData);
         }
     }
 
