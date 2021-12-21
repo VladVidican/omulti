@@ -1,7 +1,14 @@
-# Omulti - Node.js HTTP file uploads
+<p align="center">
+    <img src='./logo.png' width='120'>
+</p>
+
+<h1 align="center">
+Omulti - Node.js HTTP file uploads
+</h1>
+
+<hr>
 
 ![tests](https://github.com/VladVidican/omulti/actions/workflows/main.yml/badge.svg)
-
 
 ## Getting started
 
