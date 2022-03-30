@@ -8,6 +8,8 @@ Omulti - Node.js HTTP file uploads
 
 ![tests](https://github.com/VladVidican/omulti/actions/workflows/main.yml/badge.svg)
 
+Logo provided by https://www.behance.net/ionutvidican
+
 ## Getting started
 
 `Omulti` is a Node.js library that handles HTTP file uploads.
